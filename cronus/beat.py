@@ -2,6 +2,10 @@
 Implements the beat library
 
 Date created: 19th May 2014
+
+Modified by Vishal to skip the beatError and let beat.true loop 
+complete the execution. If the execution time is more then set the
+duration_to_sleep as 0. 
 """
 
 import datetime
@@ -36,7 +40,8 @@ def sleep():
     td = datetime.datetime.now() - loop_start_time
     duration_to_sleep = loop_duration - td.total_seconds()
     if duration_to_sleep < 0:
-        raise BeatError("skipping sleep. Too much work!")
+        duration_to_sleep = 0; # Modified.
+        #raise BeatError("skipping sleep. Too much work!") Commented
     time.sleep(duration_to_sleep)
 
 def true():
